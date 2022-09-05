@@ -4,28 +4,27 @@ from typing import List
 
 
 class FileReader:
-    def __init__(self):
-        self.data = self._get_file()
-        self.cmds = self._parse_cmds(self.data)
+    def __init__(self, data_path: str):
+        self.data = self._get_file(data_path)
 
-    def _get_file(self):
+    def _get_file(self, data_path: str):
+        file_to_data = Data()
         try:
-            with open(os.path.abspath()) as file:
-                file_to_data = Data()
-                file_to_data.add_user(file.readline())
+            with open(os.path.abspath(data_path)) as file:
+                file_to_data.add_path(data_path)
                 for line in file:
                     file_to_data.add_youtube_links(line.rstrip())
-                return file_to_data
 
         except Exception as exception:
             exception_msg = str(exception)
             print(exception_msg)
 
-        return None
+        return file_to_data
 
-    def _parse_cmds(self, data: Data):
-        cmds = []
-        for link in data.youtube_links:
-            cmds.append(
-                f'youtube-dl -o {data.path} --prefer-ffmpeg --extract-audio --audio-format mp3 {link}')
-        return cmds
+    def run_cmds(self):
+        if self.data.has_data():
+            for link in self.data.youtube_links:
+                os.system(
+                    f"youtube-dl -o \"{self.data.path}\" --prefer-ffmpeg --extract-audio --audio-format mp3 \"{link}\"")
+
+        return False if self.data.has_data() else True
