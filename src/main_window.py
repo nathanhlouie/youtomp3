@@ -7,7 +7,7 @@ def main():
     sg.theme("SystemDefault")
 
     layout = [
-        [sg.Text("Choose a file with all the youtube links to convert:")],
+        [sg.Text("Choose a file with the youtube link(s) to convert:")],
         [sg.InputText(key="FILE_PATH"), sg.FileBrowse(
             initial_folder=os.getcwd(), file_types=[("Text Files", "*.txt")])],
         [sg.Text(text="Download Status:", key="status")],
