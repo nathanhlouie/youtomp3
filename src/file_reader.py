@@ -27,11 +27,14 @@ class FileReader:
         if self.data.has_data():
             ydl_opts = {'format': 'bestaudio/best',
                         'outtmpl': self.data.path,
+                        'ffmpeg_location': os.path.join(os.path.dirname(__file__), 'ffmpeg'),
                         'postprocessors': [{
+
                             'key': 'FFmpegExtractAudio',
                             'preferredcodec': 'mp3',
                             'preferredquality': '192',
-                        }], }
+                        }],
+                        }
             with YoutubeDL(ydl_opts) as ydl:
                 ydl.download(self.data.youtube_links)
 
