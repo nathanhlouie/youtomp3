@@ -2,6 +2,13 @@ import PySimpleGUI as sg
 import os
 from file_reader import FileReader
 
+# '''
+# NEXT UP:
+# - Parse youtube links to before downloading (remove the apersand after the link itself)
+# - Add spotify links functionality (either convert spotify -> or spotify_dl)
+# - After downloading and processing, put directly into Music with artist metadata and mp3 img
+# '''
+
 
 def main():
     sg.theme("SystemDefault")

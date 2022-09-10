@@ -22,7 +22,8 @@ class Data:
         self.path = self._parse_path()
 
     def add_youtube_links(self, youtube_link: str):
-        self.youtube_links.append(youtube_link)
+        if "/results?search_query=" not in youtube_link:
+            self.youtube_links.append(youtube_link.split("&")[0])
 
     def has_data(self):
         return True if self.user != "" and self.path != "" and self.youtube_links is not [] else False
